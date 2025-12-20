@@ -5,6 +5,7 @@ import { Badge } from '../../atoms/Badge';
 import { Rating } from '../../atoms/Rating';
 import { Avatar } from '../../atoms/Avatar';
 import { ReviewCard } from '../../molecules/ReviewCard';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { GuideDetailProps } from './GuideDetailProps';
 
 // Mock guide data - in a real app, this would come from an API
@@ -114,7 +115,7 @@ export const GuideDetail = ({
 					<div className="breadcrumbs text-sm mb-6">
 						<ul>
 							<li><Link to="/">Home</Link></li>
-							<li><Link to="/guides">Guides</Link></li>
+							<li><NotImplementedLink feature="Guides">Guides</NotImplementedLink></li>
 							<li>{guide.name}</li>
 						</ul>
 					</div>

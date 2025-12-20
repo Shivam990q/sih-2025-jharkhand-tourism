@@ -31,7 +31,7 @@ export const CartItem = ({
 	return (
 		<div className={`card card-side bg-base-100 shadow-sm ${className}`.trim()}>
 			{/* Product image */}
-			<figure className="w-24 h-24 flex-shrink-0">
+			<figure className="w-16 h-16 sm:w-24 sm:h-24 flex-shrink-0">
 				<img
 					src={product.image}
 					alt={product.title}
@@ -41,10 +41,10 @@ export const CartItem = ({
 			</figure>
 
 			{/* Card body */}
-			<div className="card-body p-3 flex-row justify-between items-center gap-3">
+			<div className="card-body p-2 sm:p-3 flex-row justify-between items-center gap-2 sm:gap-3">
 				{/* Product info */}
 				<div className="flex-1 min-w-0">
-					<h3 className="font-semibold text-sm line-clamp-2">{product.title}</h3>
+					<h3 className="font-semibold text-xs sm:text-sm line-clamp-2">{product.title}</h3>
 					{product.artisan && (
 						<p className="text-xs text-base-content/60 mt-0.5">
 							by {product.artisan}

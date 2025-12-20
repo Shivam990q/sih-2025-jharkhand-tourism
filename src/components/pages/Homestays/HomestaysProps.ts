@@ -15,12 +15,12 @@
  * />
  */
 
-import type { ListingCardProps } from '../../molecules/ListingCard';
 import type { FilterState } from '../../organisms/SearchFilters';
+import type { Homestay } from "../../../types/api.types.ts";
 
 export interface HomestaysProps {
 	/** Array of homestay listings */
-	homestays?: Omit<ListingCardProps, 'isSaved' | 'onSave'>[];
+	homestays?: Homestay[];
 	/** Total count of listings (for pagination info) */
 	totalCount?: number;
 	/** Whether data is loading */

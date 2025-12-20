@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Icon } from '../../atoms/Icon';
 import { Button } from '../../atoms/Button';
 import { Input } from '../../atoms/Input';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { LoginProps, LoginFormData } from './LoginProps';
 
 /**
@@ -79,9 +80,9 @@ export const Login = ({
 				<div className="form-control">
 					<label className="label">
 						<span className="label-text font-medium">Password</span>
-						<Link to="/forgot-password" className="label-text-alt link link-primary">
+						<NotImplementedLink feature="Forgot Password" className="label-text-alt link link-primary">
 							Forgot password?
-						</Link>
+						</NotImplementedLink>
 					</label>
 					<div className="relative">
 						<Input

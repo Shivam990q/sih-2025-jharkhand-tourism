@@ -155,8 +155,12 @@ export const DatePicker = ({
 
 			{/* Error message */}
 			{error && (
-				<p className="text-error text-sm flex items-center gap-1">
-					<Icon name="error" size="xs" color="error" />
+				<p
+					className="text-error text-sm flex items-center gap-1"
+					role="alert"
+					aria-live="polite"
+				>
+					<Icon name="error" size="xs" color="error" ariaLabel="Error" />
 					{error}
 				</p>
 			)}

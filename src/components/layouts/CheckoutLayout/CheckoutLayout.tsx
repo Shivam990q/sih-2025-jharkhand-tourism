@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router';
 import { Button } from '../../atoms/Button';
 import { Icon } from '../../atoms/Icon';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { CheckoutLayoutProps } from './CheckoutLayoutProps';
 
 /**
@@ -92,9 +93,9 @@ export const CheckoutLayout = ({
 				<div className="container mx-auto px-4">
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-base-content/60">
 						<div className="flex items-center gap-4">
-							<Link to="/help" className="hover:text-base-content">Help</Link>
-							<Link to="/terms" className="hover:text-base-content">Terms</Link>
-							<Link to="/privacy" className="hover:text-base-content">Privacy</Link>
+							<NotImplementedLink feature="Help" className="hover:text-base-content cursor-pointer">Help</NotImplementedLink>
+							<NotImplementedLink feature="Terms" className="hover:text-base-content cursor-pointer">Terms</NotImplementedLink>
+							<NotImplementedLink feature="Privacy" className="hover:text-base-content cursor-pointer">Privacy</NotImplementedLink>
 						</div>
 						<div className="flex items-center gap-2">
 							<Icon name="verified_user" size="sm" />

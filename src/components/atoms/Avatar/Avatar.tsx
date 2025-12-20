@@ -59,11 +59,25 @@ export const Avatar = ({
 		!placeholder && 'bg-base-300'
 	].filter(Boolean).join(' ');
 
+	// Build aria-label for status announcement
+	const getStatusLabel = () => {
+		if (status === 'online') return `${alt} - online`;
+		if (status === 'offline') return `${alt} - offline`;
+		return alt;
+	};
+
 	return (
-		<div className={avatarClasses}>
+		<div
+			className={avatarClasses}
+			role="img"
+			aria-label={getStatusLabel()}
+		>
 			<div className={innerClasses}>
-				{placeholder ? (<span className={textSizeClasses[size]}>{placeholder}</span>) : (
-					<img src={src} alt={alt}/>)}
+				{placeholder ? (
+					<span className={textSizeClasses[size]} aria-hidden="true">{placeholder}</span>
+				) : (
+					<img src={src} alt={alt} />
+				)}
 			</div>
 		</div>
 	);

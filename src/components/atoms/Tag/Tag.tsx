@@ -74,6 +74,14 @@ export const Tag = ({
 		}
 	};
 
+	// Keyboard handler for accessibility (Enter and Space activate the tag)
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+		if (interactive && onClick && (e.key === 'Enter' || e.key === ' ')) {
+			e.preventDefault();
+			onClick();
+		}
+	};
+
 	// Default dismiss icon
 	const defaultDismissIcon = (
 		<svg
@@ -96,6 +104,7 @@ export const Tag = ({
 		<span
 			className={tagClasses}
 			onClick={handleClick}
+			onKeyDown={interactive ? handleKeyDown : undefined}
 			role={interactive ? 'button' : undefined}
 			tabIndex={interactive ? 0 : undefined}
 			{...rest}

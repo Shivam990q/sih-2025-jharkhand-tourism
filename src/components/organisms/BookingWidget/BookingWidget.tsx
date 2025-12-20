@@ -68,8 +68,12 @@ export const BookingWidget = ({
 	const isValid = checkIn && checkOut && nights >= minNights && isAvailable;
 
 	return (
-		<div className={`card bg-base-100 shadow-lg border border-base-200 ${className}`.trim()}>
-			<div className="card-body p-6">
+		<section
+			className={`card bg-base-100 shadow-lg border border-base-200 ${className}`.trim()}
+			role="form"
+			aria-label="Book this homestay"
+		>
+			<div className="card-body p-4 sm:p-6">
 				{/* Price Header */}
 				<div className="flex items-baseline gap-1 mb-4">
 					<Price amount={pricePerNight} size="lg" className="font-bold" />
@@ -78,39 +82,46 @@ export const BookingWidget = ({
 
 				{/* Availability Badge */}
 				{!isAvailable && (
-					<div className="alert alert-warning mb-4">
-						<Icon name="warning" size="sm" />
+					<div className="alert alert-warning mb-4" role="alert">
+						<Icon name="warning" size="sm" ariaLabel="Warning" />
 						<span>Not available for selected dates</span>
 					</div>
 				)}
 
 				{/* Date Selection */}
-				<div className="grid grid-cols-2 gap-0 border border-base-300 rounded-lg overflow-hidden mb-4">
-					<div className="p-3 border-r border-base-300">
-						<label className="text-xs font-semibold text-base-content/60 uppercase">
-							Check-in
-						</label>
-						<input
-							type="date"
-							value={checkIn}
-							onChange={(e) => setCheckIn(e.target.value)}
-							min={today}
-							className="w-full bg-transparent border-0 p-0 mt-1 focus:outline-none"
-						/>
+				<fieldset className="mb-4">
+					<legend className="sr-only">Select dates</legend>
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-base-300 rounded-lg overflow-hidden">
+						<div className="p-3 border-b sm:border-b-0 sm:border-r border-base-300">
+							<label htmlFor="booking-checkin" className="text-xs font-semibold text-base-content/60 uppercase">
+								Check-in
+							</label>
+							<input
+								id="booking-checkin"
+								type="date"
+								value={checkIn}
+								onChange={(e) => setCheckIn(e.target.value)}
+								min={today}
+								className="w-full bg-transparent border-0 p-0 mt-1 focus:outline-none"
+								aria-label="Check-in date"
+							/>
+						</div>
+						<div className="p-3">
+							<label htmlFor="booking-checkout" className="text-xs font-semibold text-base-content/60 uppercase">
+								Check-out
+							</label>
+							<input
+								id="booking-checkout"
+								type="date"
+								value={checkOut}
+								onChange={(e) => setCheckOut(e.target.value)}
+								min={checkIn || today}
+								className="w-full bg-transparent border-0 p-0 mt-1 focus:outline-none"
+								aria-label="Check-out date"
+							/>
+						</div>
 					</div>
-					<div className="p-3">
-						<label className="text-xs font-semibold text-base-content/60 uppercase">
-							Check-out
-						</label>
-						<input
-							type="date"
-							value={checkOut}
-							onChange={(e) => setCheckOut(e.target.value)}
-							min={checkIn || today}
-							className="w-full bg-transparent border-0 p-0 mt-1 focus:outline-none"
-						/>
-					</div>
-				</div>
+				</fieldset>
 
 				{/* Guest Selector */}
 				<div className="relative mb-4">
@@ -118,6 +129,9 @@ export const BookingWidget = ({
 						type="button"
 						onClick={() => setShowGuestSelector(!showGuestSelector)}
 						className="w-full p-3 border border-base-300 rounded-lg text-left flex items-center justify-between hover:border-primary transition-colors"
+						aria-expanded={showGuestSelector}
+						aria-haspopup="true"
+						aria-label={`Select guests, currently ${totalGuests} ${totalGuests === 1 ? 'guest' : 'guests'}`}
 					>
 						<div>
 							<div className="text-xs font-semibold text-base-content/60 uppercase">
@@ -194,11 +208,11 @@ export const BookingWidget = ({
 
 				{/* Minimum Nights Notice */}
 				{minNights > 1 && (
-					<p className="text-xs text-base-content/60 text-center mt-3">
+					<p className="text-xs text-base-content/60 text-center mt-3" id="min-nights-notice">
 						Minimum stay: {minNights} nights
 					</p>
 				)}
 			</div>
-		</div>
+		</section>
 	);
 };

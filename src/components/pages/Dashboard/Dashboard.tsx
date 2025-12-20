@@ -1,7 +1,7 @@
-import { Link } from 'react-router';
 import { Icon } from '../../atoms/Icon';
 import { Button } from '../../atoms/Button';
 import { Badge } from '../../atoms/Badge';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { DashboardProps } from './DashboardProps';
 
 // Mock dashboard data
@@ -190,9 +190,9 @@ export const Dashboard = ({
 									<Icon name="book_online" className="text-primary" />
 									Recent Bookings
 								</h2>
-								<Link to="/dashboard/bookings" className="link link-primary text-sm">
+								<NotImplementedLink feature="Bookings" className="link link-primary text-sm">
 									View all
-								</Link>
+								</NotImplementedLink>
 							</div>
 
 							<div className="overflow-x-auto">
@@ -274,18 +274,18 @@ export const Dashboard = ({
 							</h2>
 
 							<div className="space-y-2 mt-4">
-								<Link to="/dashboard/listings" className="btn btn-outline btn-block justify-start">
+								<NotImplementedLink feature="Listings" className="btn btn-outline btn-block justify-start">
 									<Icon name="add_business" size="sm" />
 									Add New Listing
-								</Link>
-								<Link to="/dashboard/reviews" className="btn btn-outline btn-block justify-start">
+								</NotImplementedLink>
+								<NotImplementedLink feature="Reviews" className="btn btn-outline btn-block justify-start">
 									<Icon name="rate_review" size="sm" />
 									Respond to Reviews
-								</Link>
-								<Link to="/dashboard/analytics" className="btn btn-outline btn-block justify-start">
+								</NotImplementedLink>
+								<NotImplementedLink feature="Analytics" className="btn btn-outline btn-block justify-start">
 									<Icon name="analytics" size="sm" />
 									View Analytics
-								</Link>
+								</NotImplementedLink>
 							</div>
 						</div>
 					</div>

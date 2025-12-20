@@ -4,16 +4,17 @@ import { Avatar } from '../../atoms/Avatar';
 import { Badge } from '../../atoms/Badge';
 import { Button } from '../../atoms/Button';
 import { Icon } from '../../atoms/Icon';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { DashboardLayoutProps, SidebarItem } from './DashboardLayoutProps';
 
-// Sidebar navigation items
-const sidebarItems: SidebarItem[] = [
-	{ label: 'Dashboard', href: '/dashboard', icon: 'dashboard' },
-	{ label: 'My Listings', href: '/dashboard/listings', icon: 'list' },
-	{ label: 'Bookings', href: '/dashboard/bookings', icon: 'calendar_month' },
-	{ label: 'Analytics', href: '/dashboard/analytics', icon: 'bar_chart' },
-	{ label: 'Reviews', href: '/dashboard/reviews', icon: 'star' },
-	{ label: 'Settings', href: '/dashboard/settings', icon: 'settings' },
+// Sidebar navigation items (implemented flag indicates if route exists)
+const sidebarItems: (SidebarItem & { implemented: boolean })[] = [
+	{ label: 'Dashboard', href: '/dashboard', icon: 'dashboard', implemented: true },
+	{ label: 'My Listings', href: '/dashboard/listings', icon: 'list', implemented: false },
+	{ label: 'Bookings', href: '/dashboard/bookings', icon: 'calendar_month', implemented: false },
+	{ label: 'Analytics', href: '/dashboard/analytics', icon: 'bar_chart', implemented: false },
+	{ label: 'Reviews', href: '/dashboard/reviews', icon: 'star', implemented: false },
+	{ label: 'Settings', href: '/dashboard/settings', icon: 'settings', implemented: false },
 ];
 
 /**
@@ -110,10 +111,10 @@ export const DashboardLayout = ({
 									</Link>
 								</li>
 								<li>
-									<Link to="/dashboard/settings">
+									<NotImplementedLink feature="Settings">
 										<Icon name="settings" size="sm" />
 										Settings
-									</Link>
+									</NotImplementedLink>
 								</li>
 								<li>
 									<Link to="/" target="_blank">
@@ -142,17 +143,27 @@ export const DashboardLayout = ({
 						<ul className="menu gap-1">
 							{sidebarItems.map((item) => (
 								<li key={item.href}>
-									<NavLink
-										to={item.href}
-										end={item.href === '/dashboard'}
-										className={({ isActive }) => isActive ? 'active' : ''}
-									>
-										<Icon name={item.icon} size="sm" />
-										{item.label}
-										{item.badge && item.badge > 0 && (
-											<Badge variant="primary" size="sm">{item.badge}</Badge>
-										)}
-									</NavLink>
+									{item.implemented ? (
+										<NavLink
+											to={item.href}
+											end={item.href === '/dashboard'}
+											className={({ isActive }) => isActive ? 'active' : ''}
+										>
+											<Icon name={item.icon} size="sm" />
+											{item.label}
+											{item.badge && item.badge > 0 && (
+												<Badge variant="primary" size="sm">{item.badge}</Badge>
+											)}
+										</NavLink>
+									) : (
+										<NotImplementedLink feature={item.label}>
+											<Icon name={item.icon} size="sm" />
+											{item.label}
+											{item.badge && item.badge > 0 && (
+												<Badge variant="primary" size="sm">{item.badge}</Badge>
+											)}
+										</NotImplementedLink>
+									)}
 								</li>
 							))}
 						</ul>
@@ -160,10 +171,10 @@ export const DashboardLayout = ({
 
 					{/* Help section */}
 					<div className="p-4 border-t border-base-200">
-						<Link to="/help" className="flex items-center gap-2 text-sm text-base-content/60 hover:text-base-content">
+						<NotImplementedLink feature="Help" className="flex items-center gap-2 text-sm text-base-content/60 hover:text-base-content cursor-pointer">
 							<Icon name="help" size="sm" />
 							Need help?
-						</Link>
+						</NotImplementedLink>
 					</div>
 				</aside>
 
@@ -199,18 +210,28 @@ export const DashboardLayout = ({
 								<ul className="menu gap-1">
 									{sidebarItems.map((item) => (
 										<li key={item.href}>
-											<NavLink
-												to={item.href}
-												end={item.href === '/dashboard'}
-												className={({ isActive }) => isActive ? 'active' : ''}
-												onClick={() => setSidebarOpen(false)}
-											>
-												<Icon name={item.icon} size="sm" />
-												{item.label}
-												{item.badge && item.badge > 0 && (
-													<Badge variant="primary" size="sm">{item.badge}</Badge>
-												)}
-											</NavLink>
+											{item.implemented ? (
+												<NavLink
+													to={item.href}
+													end={item.href === '/dashboard'}
+													className={({ isActive }) => isActive ? 'active' : ''}
+													onClick={() => setSidebarOpen(false)}
+												>
+													<Icon name={item.icon} size="sm" />
+													{item.label}
+													{item.badge && item.badge > 0 && (
+														<Badge variant="primary" size="sm">{item.badge}</Badge>
+													)}
+												</NavLink>
+											) : (
+												<NotImplementedLink feature={item.label}>
+													<Icon name={item.icon} size="sm" />
+													{item.label}
+													{item.badge && item.badge > 0 && (
+														<Badge variant="primary" size="sm">{item.badge}</Badge>
+													)}
+												</NotImplementedLink>
+											)}
 										</li>
 									))}
 								</ul>

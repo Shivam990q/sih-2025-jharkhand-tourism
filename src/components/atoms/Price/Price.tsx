@@ -39,25 +39,41 @@ export const Price = (props: PriceProps) => {
 		? Math.round(((originalAmount - amount) / originalAmount) * 100)
 		: 0;
 
+	// Build accessible label for screen readers
+	const buildAriaLabel = () => {
+		let label = formatPrice(amount);
+		if (hasDiscount) {
+			label += `, discounted from ${formatPrice(originalAmount)}, ${discountPercent}% off`;
+		}
+		if (period) {
+			label += ` ${period}`;
+		}
+		return label;
+	};
+
 	return (
-		<div className={`flex items-baseline gap-2 ${className}`.trim()}>
-			<span className={`${sizeClasses[size].price} text-base-content`}>
+		<div
+			className={`flex items-baseline gap-2 ${className}`.trim()}
+			aria-label={buildAriaLabel()}
+			role="text"
+		>
+			<span className={`${sizeClasses[size].price} text-base-content`} aria-hidden="true">
 				{formatPrice(amount)}
 			</span>
 
 			{hasDiscount && (
 				<>
-					<span className={`${sizeClasses[size].period} text-base-content/50 line-through`}>
+					<span className={`${sizeClasses[size].period} text-base-content/50 line-through`} aria-hidden="true">
 						{formatPrice(originalAmount)}
 					</span>
-					<span className="badge badge-secondary badge-sm">
+					<span className="badge badge-secondary badge-sm" aria-hidden="true">
 						{discountPercent}% off
 					</span>
 				</>
 			)}
 
 			{period && (
-				<span className={`${sizeClasses[size].period} text-base-content/60`}>
+				<span className={`${sizeClasses[size].period} text-base-content/60`} aria-hidden="true">
 					{period}
 				</span>
 			)}

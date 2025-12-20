@@ -75,7 +75,13 @@ export const Button = (props: ButtonProps) => {
 	// Render as anchor tag
 	if (as === 'a') {
 		return (
-			<a {...(rest as any)} className={buttonClasses} role="button">
+			<a
+				{...(rest as any)}
+				className={buttonClasses}
+				role="button"
+				aria-busy={loading || undefined}
+				aria-disabled={loading || undefined}
+			>
 				{loadingSpinner}
 				{children}
 			</a>
@@ -84,7 +90,11 @@ export const Button = (props: ButtonProps) => {
 
 	// Render as button tag (default)
 	return (
-		<button {...(rest as any)} className={buttonClasses}>
+		<button
+			{...(rest as any)}
+			className={buttonClasses}
+			aria-busy={loading || undefined}
+		>
 			{loadingSpinner}
 			{children}
 		</button>

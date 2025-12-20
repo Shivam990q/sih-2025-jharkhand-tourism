@@ -6,7 +6,7 @@
  * - Featured categories
  * - Featured destinations
  * - How it works section
- * - Featured homestays
+ * - Featured homestays (fetched from API)
  * - Testimonials
  * - CTA sections
  *
@@ -16,14 +16,12 @@
  * <Home />
  *
  * @example
- * // With featured data
+ * // With callbacks
  * <Home
- *   featuredHomestays={homestays}
  *   onSearch={(query) => navigate(`/search?q=${query}`)}
+ *   onCategoryClick={(cat) => navigate(`/search?type=${cat}`)}
  * />
  */
-
-import type { ListingCardProps } from '../../molecules/ListingCard';
 
 export interface Destination {
 	/** Unique identifier */
@@ -52,11 +50,9 @@ export interface Testimonial {
 }
 
 export interface HomeProps {
-	/** Featured homestay listings */
-	featuredHomestays?: Omit<ListingCardProps, 'isSaved' | 'onSave'>[];
-	/** Featured destinations */
+	/** Featured destinations (static data) */
 	featuredDestinations?: Destination[];
-	/** Testimonials/reviews */
+	/** Testimonials/reviews (static data) */
 	testimonials?: Testimonial[];
 	/** Callback when search is submitted */
 	onSearch?: (query: string) => void;

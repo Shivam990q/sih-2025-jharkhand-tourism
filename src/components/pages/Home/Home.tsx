@@ -1,14 +1,34 @@
+import { useMemo } from 'react';
 import { Icon } from '../../atoms/Icon';
 import { Button } from '../../atoms/Button';
 import { Rating } from '../../atoms/Rating';
 import { Avatar } from '../../atoms/Avatar';
 import { Hero } from '../../organisms/Hero';
 import { ListingGrid } from '../../organisms/ListingGrid';
+import { useApi } from '../../../hooks/useApi';
+import { homestaysService } from '../../../services/homestays.service';
 import type { HomeProps, Destination, Testimonial } from './HomeProps';
 import type { ListingCardProps } from '../../molecules/ListingCard';
+import type { Homestay } from '../../../types/api.types';
 
-// Default featured homestays
-const defaultHomestays: Omit<ListingCardProps, 'isSaved' | 'onSave'>[] = [
+/**
+ * Transform API homestay data to ListingCardProps format
+ */
+const transformHomestayToListingCard = (homestay: Homestay): Omit<ListingCardProps, 'isSaved' | 'onSave'> => ({
+	id: homestay.id,
+	type: 'homestay',
+	title: homestay.title,
+	image: homestay.images[0] || '',
+	location: homestay.location,
+	rating: homestay.rating,
+	reviewCount: homestay.reviewCount,
+	price: homestay.price,
+	period: 'per night',
+	badges: homestay.rating >= 4.8 ? [{ label: 'Superhost', variant: 'primary' as const }] : undefined,
+});
+
+// Fallback homestays data (used when API fails)
+const fallbackHomestays: Omit<ListingCardProps, 'isSaved' | 'onSave'>[] = [
 	{
 		id: '1',
 		type: 'homestay',
@@ -177,7 +197,6 @@ const howItWorks = [
  * Home page component
  */
 export const Home = ({
-	featuredHomestays = defaultHomestays,
 	featuredDestinations = defaultDestinations,
 	testimonials = defaultTestimonials,
 	onSearch,
@@ -185,6 +204,24 @@ export const Home = ({
 	onDestinationClick,
 	className = '',
 }: HomeProps) => {
+	// Fetch featured homestays from API
+	const {
+		data: homestaysResponse,
+		loading: homestaysLoading,
+		error: homestaysError
+	} = useApi(
+		() => homestaysService.getAll({ limit: 4, sortBy: 'rating', sortOrder: 'desc' }),
+		[]
+	);
+
+	// Transform API data to ListingCardProps format, with fallback
+	const featuredHomestays = useMemo(() => {
+		if (homestaysError || !homestaysResponse?.data) {
+			return fallbackHomestays;
+		}
+		return homestaysResponse.data.slice(0, 4).map(transformHomestayToListingCard);
+	}, [homestaysResponse, homestaysError]);
+
 	return (
 		<div className={`min-h-screen ${className}`.trim()}>
 			{/* Hero Section */}
@@ -326,6 +363,8 @@ export const Home = ({
 					<ListingGrid
 						listings={featuredHomestays}
 						columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+						loading={homestaysLoading}
+						skeletonCount={4}
 					/>
 				</div>
 			</section>

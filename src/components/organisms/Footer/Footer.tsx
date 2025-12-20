@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Button } from '../../atoms/Button';
 import { Icon } from '../../atoms/Icon';
 import { Input } from '../../atoms/Input';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { FooterProps } from './FooterProps';
 
 /**
@@ -17,28 +18,28 @@ export const Footer = ({
 }: FooterProps) => {
 	const [email, setEmail] = useState('');
 
-	// Footer link sections
+	// Footer link sections (implemented flag indicates if route exists)
 	const exploreLinks = [
-		{ label: 'Homestays', href: '/homestays' },
-		{ label: 'Local Guides', href: '/guides' },
-		{ label: 'Marketplace', href: '/marketplace' },
-		{ label: 'Destinations', href: '/destinations' },
-		{ label: 'Experiences', href: '/experiences' },
+		{ label: 'Homestays', href: '/homestays', implemented: true },
+		{ label: 'Local Guides', href: '/guides', implemented: false },
+		{ label: 'Marketplace', href: '/marketplace', implemented: false },
+		{ label: 'Destinations', href: '/destinations', implemented: false },
+		{ label: 'Experiences', href: '/experiences', implemented: false },
 	];
 
 	const supportLinks = [
-		{ label: 'Help Center', href: '/help' },
-		{ label: 'Safety Information', href: '/safety' },
-		{ label: 'Cancellation Policy', href: '/cancellation-policy' },
-		{ label: 'Contact Us', href: '/contact' },
-		{ label: 'FAQs', href: '/faqs' },
+		{ label: 'Help Center', href: '/help', implemented: false },
+		{ label: 'Safety Information', href: '/safety', implemented: false },
+		{ label: 'Cancellation Policy', href: '/cancellation-policy', implemented: false },
+		{ label: 'Contact Us', href: '/contact', implemented: false },
+		{ label: 'FAQs', href: '/faqs', implemented: false },
 	];
 
 	const legalLinks = [
-		{ label: 'Terms of Service', href: '/terms' },
-		{ label: 'Privacy Policy', href: '/privacy' },
-		{ label: 'Cookie Policy', href: '/cookies' },
-		{ label: 'Refund Policy', href: '/refunds' },
+		{ label: 'Terms of Service', href: '/terms', implemented: false },
+		{ label: 'Privacy Policy', href: '/privacy', implemented: false },
+		{ label: 'Cookie Policy', href: '/cookies', implemented: false },
+		{ label: 'Refund Policy', href: '/refunds', implemented: false },
 	];
 
 	const socialLinks = [
@@ -101,12 +102,21 @@ export const Footer = ({
 						<ul className="space-y-2">
 							{exploreLinks.map((link) => (
 								<li key={link.href}>
-									<Link
-										to={link.href}
-										className="text-neutral-content/70 hover:text-neutral-content transition-colors"
-									>
-										{link.label}
-									</Link>
+									{link.implemented ? (
+										<Link
+											to={link.href}
+											className="text-neutral-content/70 hover:text-neutral-content transition-colors"
+										>
+											{link.label}
+										</Link>
+									) : (
+										<NotImplementedLink
+											feature={link.label}
+											className="text-neutral-content/70 hover:text-neutral-content transition-colors cursor-pointer"
+										>
+											{link.label}
+										</NotImplementedLink>
+									)}
 								</li>
 							))}
 						</ul>
@@ -118,12 +128,21 @@ export const Footer = ({
 						<ul className="space-y-2">
 							{supportLinks.map((link) => (
 								<li key={link.href}>
-									<Link
-										to={link.href}
-										className="text-neutral-content/70 hover:text-neutral-content transition-colors"
-									>
-										{link.label}
-									</Link>
+									{link.implemented ? (
+										<Link
+											to={link.href}
+											className="text-neutral-content/70 hover:text-neutral-content transition-colors"
+										>
+											{link.label}
+										</Link>
+									) : (
+										<NotImplementedLink
+											feature={link.label}
+											className="text-neutral-content/70 hover:text-neutral-content transition-colors cursor-pointer"
+										>
+											{link.label}
+										</NotImplementedLink>
+									)}
 								</li>
 							))}
 						</ul>
@@ -170,13 +189,23 @@ export const Footer = ({
 						{/* Legal Links */}
 						<div className="flex flex-wrap justify-center gap-4">
 							{legalLinks.map((link) => (
-								<Link
-									key={link.href}
-									to={link.href}
-									className="text-neutral-content/60 hover:text-neutral-content text-sm transition-colors"
-								>
-									{link.label}
-								</Link>
+								link.implemented ? (
+									<Link
+										key={link.href}
+										to={link.href}
+										className="text-neutral-content/60 hover:text-neutral-content text-sm transition-colors"
+									>
+										{link.label}
+									</Link>
+								) : (
+									<NotImplementedLink
+										key={link.href}
+										feature={link.label}
+										className="text-neutral-content/60 hover:text-neutral-content text-sm transition-colors cursor-pointer"
+									>
+										{link.label}
+									</NotImplementedLink>
+								)
 							))}
 						</div>
 

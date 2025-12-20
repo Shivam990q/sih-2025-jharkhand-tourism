@@ -2,21 +2,22 @@
 
 **SIH 2025 Problem Statement #25032**
 
-[![Live Demo](https://img.shields.io/badge/demo-live-green)](https://jharkhandyatra.vercel.app)
+[![Live Demo](https://img.shields.io/badge/demo-GitHub_Pages-green)](https://dbc2201.github.io/sih-2025-jharkhand-tourism/)
+[![Storybook](https://img.shields.io/badge/storybook-docs-ff4785)](https://dbc2201.github.io/sih-2025-jharkhand-tourism/storybook)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript)](https://www.typescriptlang.org)
-[![Node.js](https://img.shields.io/badge/Node.js-24_LTS-339933?logo=node.js)](https://nodejs.org)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 
 ---
 
-## 🎯 What It Does
+## What It Does
 
 **JharkhandYatra** connects travelers with authentic local experiences in Jharkhand—from tribal homestays and verified local guides to handcrafted artisan products—making eco and cultural tourism accessible, organized, and community-empowering.
 
 **Tagline:** *"Discover the Soul of Jharkhand"*
 
-**Live Demo:** [https://jharkhandyatra.vercel.app](https://jharkhandyatra.vercel.app)
+**Live Demo:** [https://dbc2201.github.io/sih-2025-jharkhand-tourism/](https://dbc2201.github.io/sih-2025-jharkhand-tourism/)
 
 ---
 
@@ -59,373 +60,225 @@ Jharkhand possesses extraordinary natural beauty, rich tribal heritage, and incr
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-### Frontend
+### Frontend (Current)
 - **Framework:** React 19 with TypeScript 5.7+
 - **Build Tool:** Vite 6.x
 - **Routing:** React Router v7
 - **Styling:** TailwindCSS v4 + DaisyUI v5
-- **State Management:** Context API + useReducer
-- **Forms:** React Hook Form + Zod validation
-- **HTTP Client:** Axios
+- **Component Docs:** Storybook 8
 - **Icons:** Google Material Symbols (Outlined)
 - **Date Handling:** date-fns
-- **Notifications:** react-hot-toast
 
-### Backend
+### Deployment
+- **Hosting:** GitHub Pages
+- **Version Control:** Git + GitHub
+
+### Backend (Planned)
 - **Runtime:** Node.js v24 LTS
-- **Language:** TypeScript 5.7+
 - **Framework:** Express.js v5
 - **Database:** MongoDB 8.0+ with Mongoose v8
 - **Authentication:** JWT + bcrypt.js
-- **File Uploads:** Multer + Cloudinary
-- **Validation:** Zod
-
-### DevOps & Deployment
-- **Version Control:** Git + GitHub
-- **Frontend Hosting:** Vercel
-- **Backend Hosting:** Railway
-- **Database Hosting:** MongoDB Atlas
-- **Containerization:** Docker + Docker Compose
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
 - Node.js 24 LTS ([Download](https://nodejs.org))
-- npm or yarn
-- MongoDB (local installation or [Atlas account](https://www.mongodb.com/cloud/atlas))
-- Git
+- npm
 
 ### Installation
 
 ```bash
 # Clone repository
-git clone https://github.com/your-team/jharkhandyatra.git
-cd jharkhandyatra
+git clone https://github.com/dbc2201/sih-2025-jharkhand-tourism.git
+cd sih-2025-jharkhand-tourism
 
-# Install frontend dependencies
-cd frontend
-npm install
-
-# Install backend dependencies
-cd ../backend
+# Install dependencies
 npm install
 ```
 
-### Environment Configuration
-
-**Frontend (.env in `/frontend`):**
-```env
-VITE_API_BASE_URL=http://localhost:5000/api
-VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
-VITE_CLOUDINARY_UPLOAD_PRESET=your_preset
-```
-
-**Backend (.env in `/backend`):**
-```env
-# Server
-PORT=5000
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
-
-# Database
-MONGODB_URI=mongodb://localhost:27017/jharkhandyatra
-# Or for MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/jharkhandyatra
-
-# Authentication
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
-JWT_EXPIRE=7d
-
-# File Upload
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# Payment (Optional for MVP)
-RAZORPAY_KEY_ID=your_key_id
-RAZORPAY_KEY_SECRET=your_key_secret
-```
-
-### Run Development Servers
+### Run Development Server
 
 ```bash
-# Terminal 1 - Frontend Development Server
-cd frontend
+# Start the development server
 npm run dev
-# 🚀 Frontend running at: http://localhost:5173
+# Frontend running at: http://localhost:5173
 
-# Terminal 2 - Backend Development Server
-cd backend
-npm run dev
-# 🚀 Backend running at: http://localhost:5000
+# Run Storybook for component documentation
+npm run storybook
+# Storybook running at: http://localhost:6006
 ```
 
-### Using Docker (Alternative)
+### Build for Production
 
 ```bash
-# Build and run all services
-docker-compose up -d
+# Build the application
+npm run build
 
-# Access:
-# Frontend: http://localhost:5173
-# Backend: http://localhost:5000
-# MongoDB: mongodb://localhost:27017
+# Preview the production build
+npm run preview
 ```
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-jharkhandyatra/
+sih-2025-jharkhand-tourism/
+├── public/
+│   └── favicon.ico
 │
-├── frontend/                    # React + TypeScript Frontend
-│   ├── public/
-│   │   ├── favicon.ico
-│   │   └── logo.svg
+├── src/
+│   ├── components/              # Atomic Design Components
+│   │   ├── atoms/               # 9 basic building blocks
+│   │   │   ├── Avatar/          # User images with status
+│   │   │   ├── Badge/           # Status labels
+│   │   │   ├── Button/          # Action triggers
+│   │   │   ├── Icon/            # Material Symbols
+│   │   │   ├── Input/           # Form inputs
+│   │   │   ├── Price/           # Currency display
+│   │   │   ├── Rating/          # Star ratings
+│   │   │   ├── Skeleton/        # Loading placeholders
+│   │   │   └── Tag/             # Filter tags
+│   │   │
+│   │   ├── molecules/           # 10 composite components
+│   │   │   ├── AmenityItem/     # Amenity display
+│   │   │   ├── CartItem/        # Cart item
+│   │   │   ├── DatePicker/      # Date selection
+│   │   │   ├── FilterChip/      # Active filter
+│   │   │   ├── FormField/       # Form input with validation
+│   │   │   ├── GuestSelector/   # Guest count
+│   │   │   ├── ListingCard/     # Listing preview
+│   │   │   ├── NavItem/         # Nav menu item
+│   │   │   ├── ReviewCard/      # Review display
+│   │   │   └── SearchBar/       # Search interface
+│   │   │
+│   │   ├── organisms/           # 11 complex components
+│   │   │   ├── BookingWidget/   # Booking sidebar
+│   │   │   ├── Footer/          # Site footer
+│   │   │   ├── Hero/            # Hero section
+│   │   │   ├── HostCard/        # Host profile
+│   │   │   ├── ListingGrid/     # Listing grid
+│   │   │   ├── MapView/         # Embedded map
+│   │   │   ├── MobileNav/       # Mobile navigation
+│   │   │   ├── Navbar/          # Site navigation
+│   │   │   ├── ReviewSection/   # Reviews list
+│   │   │   ├── SearchFilters/   # Filter panel
+│   │   │   └── ShoppingCart/    # Cart drawer
+│   │   │
+│   │   ├── layouts/             # 4 page layouts
+│   │   │   ├── AuthLayout/
+│   │   │   ├── CheckoutLayout/
+│   │   │   ├── DashboardLayout/
+│   │   │   └── MainLayout/
+│   │   │
+│   │   └── pages/               # 12 route components
+│   │       ├── Booking/
+│   │       ├── Checkout/
+│   │       ├── Dashboard/
+│   │       ├── GuideDetail/
+│   │       ├── Home/
+│   │       ├── HomestayDetail/
+│   │       ├── Login/
+│   │       ├── NotFound/
+│   │       ├── ProductDetail/
+│   │       ├── Profile/
+│   │       ├── Register/
+│   │       └── Search/
 │   │
-│   ├── src/
-│   │   ├── components/         # Atomic Design Components
-│   │   │   ├── atoms/          # Basic building blocks
-│   │   │   │   ├── Button/
-│   │   │   │   ├── Input/
-│   │   │   │   ├── Badge/
-│   │   │   │   ├── Avatar/
-│   │   │   │   ├── Rating/
-│   │   │   │   └── Price/
-│   │   │   │
-│   │   │   ├── molecules/      # Composite components
-│   │   │   │   ├── ListingCard/
-│   │   │   │   ├── SearchBar/
-│   │   │   │   ├── DateRangePicker/
-│   │   │   │   └── ReviewCard/
-│   │   │   │
-│   │   │   ├── organisms/      # Complex components
-│   │   │   │   ├── Navbar/
-│   │   │   │   ├── Footer/
-│   │   │   │   ├── BookingWidget/
-│   │   │   │   └── SearchFilters/
-│   │   │   │
-│   │   │   ├── layouts/        # Page layouts
-│   │   │   │   ├── MainLayout/
-│   │   │   │   ├── AuthLayout/
-│   │   │   │   └── DashboardLayout/
-│   │   │   │
-│   │   │   └── pages/          # Route components
-│   │   │       ├── Home/
-│   │   │       ├── Search/
-│   │   │       ├── HomestayDetail/
-│   │   │       ├── Marketplace/
-│   │   │       └── Dashboard/
-│   │   │
-│   │   ├── context/            # React Context providers
-│   │   │   ├── AuthContext.tsx
-│   │   │   ├── CartContext.tsx
-│   │   │   └── SearchContext.tsx
-│   │   │
-│   │   ├── hooks/              # Custom React hooks
-│   │   │   ├── useAuth.ts
-│   │   │   ├── useSearch.ts
-│   │   │   ├── useBooking.ts
-│   │   │   └── useCart.ts
-│   │   │
-│   │   ├── services/           # API service layer
-│   │   │   ├── api.ts
-│   │   │   ├── auth.service.ts
-│   │   │   ├── listings.service.ts
-│   │   │   ├── bookings.service.ts
-│   │   │   └── orders.service.ts
-│   │   │
-│   │   ├── types/              # TypeScript type definitions
-│   │   │   ├── user.types.ts
-│   │   │   ├── listing.types.ts
-│   │   │   ├── booking.types.ts
-│   │   │   └── order.types.ts
-│   │   │
-│   │   ├── utils/              # Utility functions
-│   │   │   ├── formatters.ts
-│   │   │   ├── validators.ts
-│   │   │   └── constants.ts
-│   │   │
-│   │   ├── App.tsx             # Root component
-│   │   ├── main.tsx            # Entry point
-│   │   └── index.css           # Global styles + DaisyUI theme
-│   │
-│   ├── .env.example
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── vite.config.ts
-│   └── tailwind.config.js
+│   ├── stories/                 # Storybook stories
+│   ├── App.tsx                  # Root component with routing
+│   ├── main.tsx                 # Entry point
+│   └── index.css                # Global styles + DaisyUI theme
 │
-├── backend/                     # Node.js + Express Backend
-│   ├── src/
-│   │   ├── controllers/        # Request handlers
-│   │   │   ├── auth.controller.ts
-│   │   │   ├── homestay.controller.ts
-│   │   │   ├── guide.controller.ts
-│   │   │   ├── product.controller.ts
-│   │   │   ├── booking.controller.ts
-│   │   │   └── order.controller.ts
-│   │   │
-│   │   ├── models/             # Mongoose schemas
-│   │   │   ├── User.model.ts
-│   │   │   ├── Homestay.model.ts
-│   │   │   ├── Guide.model.ts
-│   │   │   ├── Product.model.ts
-│   │   │   ├── Booking.model.ts
-│   │   │   ├── Order.model.ts
-│   │   │   └── Review.model.ts
-│   │   │
-│   │   ├── routes/             # API routes
-│   │   │   ├── auth.routes.ts
-│   │   │   ├── homestay.routes.ts
-│   │   │   ├── guide.routes.ts
-│   │   │   ├── product.routes.ts
-│   │   │   ├── booking.routes.ts
-│   │   │   ├── order.routes.ts
-│   │   │   └── index.ts
-│   │   │
-│   │   ├── middleware/         # Express middleware
-│   │   │   ├── auth.middleware.ts
-│   │   │   ├── error.middleware.ts
-│   │   │   ├── validation.middleware.ts
-│   │   │   └── upload.middleware.ts
-│   │   │
-│   │   ├── types/              # TypeScript types
-│   │   │   ├── express.d.ts
-│   │   │   └── models.types.ts
-│   │   │
-│   │   ├── utils/              # Utility functions
-│   │   │   ├── jwt.utils.ts
-│   │   │   ├── cloudinary.utils.ts
-│   │   │   └── validators.ts
-│   │   │
-│   │   ├── config/             # Configuration
-│   │   │   ├── database.ts
-│   │   │   └── constants.ts
-│   │   │
-│   │   ├── app.ts              # Express app setup
-│   │   └── server.ts           # Server entry point
-│   │
-│   ├── .env.example
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── nodemon.json
-│
-├── docker-compose.yml           # Docker services configuration
-├── .gitignore
-├── LICENSE
-└── README.md                    # This file
+├── .storybook/                  # Storybook configuration
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── PRD.md                       # Product Requirements Document
+└── README.md
 ```
 
 ---
 
-## 📡 API Documentation
+## Component Library
 
-### Base URL
-```
-Development: http://localhost:5000/api
-Production: https://jharkhandyatra-api.railway.app/api
-```
+### Atoms (Basic Building Blocks)
+| Component | Purpose | Key Features |
+|-----------|---------|--------------|
+| **Avatar** | User images | Size variants, status indicators, placeholder support |
+| **Badge** | Status labels | 8 color variants, 5 style options |
+| **Button** | Actions | Loading state, multiple sizes, link support |
+| **Icon** | Material Symbols | Keyboard accessible, color variants |
+| **Input** | Form inputs | Validation states, size variants |
+| **Price** | Currency display | INR formatting, discount display |
+| **Rating** | Star ratings | Interactive & readonly modes, half-star support |
+| **Skeleton** | Loading states | Block & text variants |
+| **Tag** | Filter tags | Dismissible, interactive modes |
 
-### Authentication Endpoints
+### Molecules (Composite Components)
+| Component | Purpose |
+|-----------|---------|
+| **ListingCard** | Preview cards for homestays, guides, products |
+| **SearchBar** | Search with filter button |
+| **ReviewCard** | User review with rating |
+| **CartItem** | Shopping cart item with quantity controls |
+| **GuestSelector** | Adults/children counter |
 
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/auth/register` | Register new user | ❌ |
-| POST | `/auth/login` | Login user | ❌ |
-| POST | `/auth/logout` | Logout user | ✅ |
-| GET | `/auth/me` | Get current user | ✅ |
-| POST | `/auth/refresh` | Refresh access token | ✅ |
-| POST | `/auth/forgot` | Request password reset | ❌ |
-| POST | `/auth/reset` | Reset password with token | ❌ |
-
-### Homestay Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/homestays` | List homestays (with filters) | ❌ |
-| GET | `/homestays/:id` | Get homestay details | ❌ |
-| POST | `/homestays` | Create homestay | ✅ (Provider) |
-| PUT | `/homestays/:id` | Update homestay | ✅ (Owner) |
-| DELETE | `/homestays/:id` | Delete homestay | ✅ (Owner) |
-| GET | `/homestays/:id/reviews` | Get reviews | ❌ |
-
-### Guide Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/guides` | List guides (with filters) | ❌ |
-| GET | `/guides/:id` | Get guide details | ❌ |
-| POST | `/guides` | Create guide profile | ✅ (Provider) |
-| PUT | `/guides/:id` | Update guide profile | ✅ (Owner) |
-| GET | `/guides/:id/reviews` | Get reviews | ❌ |
-
-### Product Endpoints (Marketplace)
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/products` | List products (with filters) | ❌ |
-| GET | `/products/:id` | Get product details | ❌ |
-| POST | `/products` | Create product | ✅ (Artisan) |
-| PUT | `/products/:id` | Update product | ✅ (Owner) |
-| DELETE | `/products/:id` | Delete product | ✅ (Owner) |
-
-### Booking Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/bookings` | List user bookings | ✅ |
-| POST | `/bookings` | Create booking | ✅ |
-| GET | `/bookings/:id` | Get booking details | ✅ |
-| PUT | `/bookings/:id/cancel` | Cancel booking | ✅ |
-
-### Order Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/orders` | List user orders | ✅ |
-| POST | `/orders` | Create order from cart | ✅ |
-| GET | `/orders/:id` | Get order details | ✅ |
-| PUT | `/orders/:id/cancel` | Cancel order | ✅ |
-
-### Search & Utility Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/search` | Unified search (all types) | ❌ |
-| GET | `/search/suggestions` | Autocomplete suggestions | ❌ |
-| GET | `/destinations` | List destinations/districts | ❌ |
-
-### Example API Request
-
-```bash
-# Get all homestays with filters
-curl -X GET "http://localhost:5000/api/homestays?district=Ranchi&minPrice=1000&maxPrice=5000&rating=4"
-
-# Create a booking (requires authentication)
-curl -X POST "http://localhost:5000/api/bookings" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "listing": "homestay_id",
-    "checkIn": "2025-01-15",
-    "checkOut": "2025-01-18",
-    "guests": {
-      "adults": 2,
-      "children": 1
-    }
-  }'
-```
+### Organisms (Complex Components)
+| Component | Purpose |
+|-----------|---------|
+| **Navbar** | Site navigation with auth menu |
+| **BookingWidget** | Date selection, guest count, pricing |
+| **SearchFilters** | Price, rating, amenity filters |
+| **ShoppingCart** | Cart drawer with checkout |
+| **ListingGrid** | Responsive grid with loading states |
 
 ---
 
-## 🎨 Design System
+## Routing
+
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Home | Landing page with featured content |
+| `/search` | Search | Search results with filters |
+| `/homestays/:id` | HomestayDetail | Homestay details and booking |
+| `/guides/:id` | GuideDetail | Guide profile and tours |
+| `/products/:id` | ProductDetail | Product details |
+| `/booking` | Booking | Booking confirmation |
+| `/checkout` | Checkout | Cart checkout flow |
+| `/login` | Login | User authentication |
+| `/register` | Register | User registration |
+| `/profile` | Profile | User profile |
+| `/dashboard` | Dashboard | Provider dashboard |
+| `*` | NotFound | 404 page |
+
+---
+
+## API Documentation (Planned)
+
+> **Note:** The frontend currently uses static mock data. API integration with Postman Mock Server is planned.
+
+### Planned Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/homestays` | List homestays with filters |
+| `GET /api/homestays/:id` | Get homestay details |
+| `GET /api/guides` | List guides with filters |
+| `GET /api/guides/:id` | Get guide details |
+| `GET /api/products` | List products with filters |
+| `GET /api/products/:id` | Get product details |
+| `GET /api/search` | Unified search |
+| `POST /api/bookings` | Create booking |
+
+---
+
+## Design System
 
 ### Brand Identity
 
@@ -468,123 +321,73 @@ Represents Jharkhand's dense forests and eco-tourism focus
 
 ---
 
-## 🧪 Testing
-
-### Running Tests
+## Scripts
 
 ```bash
-# Frontend tests
-cd frontend
-npm run test
-
-# Backend tests
-cd backend
-npm run test
-
-# E2E tests
-npm run test:e2e
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run storybook    # Start Storybook
+npm run deploy       # Deploy to GitHub Pages
 ```
-
-### Test Coverage
-
-- ✅ Unit tests for utilities and helpers
-- ✅ Component tests with React Testing Library
-- ✅ API endpoint integration tests
-- ✅ Database model validation tests
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
-### Frontend Deployment (Vercel)
+The application is deployed to **GitHub Pages** using the `gh-pages` package.
 
 ```bash
-cd frontend
-
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy to production
-vercel --prod
-
-# Configure environment variables in Vercel dashboard
-# VITE_API_BASE_URL=https://your-backend.railway.app/api
+# Build and deploy
+npm run deploy
 ```
 
-### Backend Deployment (Railway)
-
-1. Create new project on [Railway](https://railway.app)
-2. Connect GitHub repository
-3. Add MongoDB database service
-4. Set environment variables:
-    - `NODE_ENV=production`
-    - `MONGODB_URI` (from Railway MongoDB service)
-    - `JWT_SECRET` (generate secure random string)
-    - `CORS_ORIGIN` (your Vercel frontend URL)
-    - Cloudinary credentials
-5. Deploy automatically on every push to main branch
-
-### Database Setup (MongoDB Atlas)
-
-1. Create cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Create database user with password
-3. Whitelist IP addresses (or allow from anywhere for development)
-4. Copy connection string
-5. Update `MONGODB_URI` in backend `.env`
+**Live URL:** [https://dbc2201.github.io/sih-2025-jharkhand-tourism/](https://dbc2201.github.io/sih-2025-jharkhand-tourism/)
 
 ---
 
-## 📊 Database Schema
+## Accessibility
 
-### Collections Overview
+This project follows **WCAG 2.1 AA** guidelines:
 
-- **users** - User accounts (tourists, providers, artisans, admins)
-- **homestays** - Homestay listings with location, amenities, pricing
-- **guides** - Local guide profiles with specializations
-- **products** - Handicraft marketplace items
-- **bookings** - Homestay and guide reservations
-- **orders** - Product purchase orders
-- **reviews** - User reviews for listings
-
-### Key Relationships
-
-```
-User (1) ──< (Many) Homestays (host)
-User (1) ──< (Many) Bookings
-User (1) ──< (Many) Orders
-Homestay (1) ──< (Many) Bookings
-Homestay (1) ──< (Many) Reviews
-```
+- Keyboard navigation for all interactive elements
+- ARIA labels for screen readers
+- Semantic HTML structure
+- Focus indicators
+- Color contrast compliance
+- Loading state announcements
 
 ---
 
-## 🎯 MVP Features Checklist
+## Browser Support
 
-### Phase 1: Core Platform (Days 1-6) ✅
-- [x] User authentication (register, login, JWT)
-- [x] Homestay listing creation and browsing
-- [x] Guide profile creation and browsing
-- [x] Product marketplace with categories
-- [x] Advanced search with filters
-- [x] Listing detail pages with reviews
-- [x] Responsive design (mobile + desktop)
-
-### Phase 2: Booking & Transactions (Days 7-10) ✅
-- [x] Homestay booking system
-- [x] Guide booking system
-- [x] Shopping cart functionality
-- [x] Order management
-- [x] Booking status tracking
-
-### Phase 3: Enhanced Features (Days 11-12) 🚧
-- [ ] Trip planner with wishlists
-- [ ] Service provider dashboard
-- [ ] Analytics for providers
-- [ ] Razorpay payment integration
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ---
 
-## 🤝 Contributing
+## Features Completed
+
+### Frontend ✅
+- [x] Component library (atoms, molecules, organisms)
+- [x] All pages (Home, Search, Detail, Checkout, Auth)
+- [x] Responsive design (mobile-first)
+- [x] Accessibility (WCAG 2.1 AA)
+- [x] Storybook documentation
+- [x] GitHub Pages deployment
+
+### Planned 🚧
+- [ ] API integration (Axios + Postman Mock)
+- [ ] State management (Cart, Search contexts)
+- [ ] Backend (Express.js + MongoDB)
+- [ ] Authentication (JWT)
+- [ ] Payment integration (Razorpay)
+
+---
+
+## Contributing
 
 We welcome contributions from the community! Please follow these steps:
 
@@ -619,12 +422,10 @@ We welcome contributions from the community! Please follow these steps:
 
 ---
 
-## 📝 Documentation
+## Documentation
 
-- **Product Requirements Document (PRD):** [docs/PRD.md](docs/PRD.md)
-- **API Documentation:** [docs/API.md](docs/API.md)
-- **Component Library:** [docs/COMPONENTS.md](docs/COMPONENTS.md)
-- **Deployment Guide:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+- **Product Requirements Document:** [PRD.md](PRD.md)
+- **Component Library:** [Storybook](https://dbc2201.github.io/sih-2025-jharkhand-tourism/storybook)
 
 ---
 
@@ -659,69 +460,38 @@ limitations under the License.
 
 ---
 
-## 📞 Contact & Support
+## Links
 
-**Project Repository:** [https://github.com/your-team/jharkhandyatra](https://github.com/your-team/jharkhandyatra)
-
-**Live Demo:** [https://jharkhandyatra.vercel.app](https://jharkhandyatra.vercel.app)
-
-**Team Email:** team@jharkhandyatra.com
-
-**Issue Tracker:** [GitHub Issues](https://github.com/your-team/jharkhandyatra/issues)
+- **Live Demo:** [https://dbc2201.github.io/sih-2025-jharkhand-tourism/](https://dbc2201.github.io/sih-2025-jharkhand-tourism/)
+- **Repository:** [https://github.com/dbc2201/sih-2025-jharkhand-tourism](https://github.com/dbc2201/sih-2025-jharkhand-tourism)
+- **Storybook:** [https://dbc2201.github.io/sih-2025-jharkhand-tourism/storybook](https://dbc2201.github.io/sih-2025-jharkhand-tourism/storybook)
+- **Issue Tracker:** [GitHub Issues](https://github.com/dbc2201/sih-2025-jharkhand-tourism/issues)
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
-### Upcoming Features
-- [ ] **Multilingual Support** - Hindi and local tribal languages
-- [ ] **Mobile Apps** - iOS and Android native apps
-- [ ] **Advanced Analytics** - Provider performance metrics
-- [ ] **AI Recommendations** - Personalized travel suggestions
-- [ ] **Virtual Tours** - 360° previews of homestays
-- [ ] **Community Forum** - Traveler discussion board
-- [ ] **Loyalty Program** - Rewards for frequent travelers
-- [ ] **Environmental Impact Tracker** - Carbon footprint monitoring
+### Next Steps
+- [ ] API integration with Postman Mock Server
+- [ ] State management (Cart, Search contexts)
+- [ ] Backend development (Express.js + MongoDB)
+- [ ] User authentication (JWT)
+- [ ] Payment integration (Razorpay)
 
----
-
-## 📈 Impact Metrics
-
-**Target Impact:**
-- 🏘️ Onboard **500+ homestays** in first year
-- 👥 Connect **200+ local guides** with tourists
-- 🎨 Empower **100+ artisans** through marketplace
-- 🌍 Increase tourism footfall by **30%** in rural areas
-- 💰 Generate **₹1 Cr+** revenue for local communities
+### Future Features
+- [ ] Multilingual Support (Hindi)
+- [ ] Advanced Analytics
+- [ ] AI Recommendations
+- [ ] Mobile Apps
 
 ---
 
-## ⚡ Performance
-
-- **Lighthouse Score:** 95+ (Performance, Accessibility, Best Practices, SEO)
-- **First Contentful Paint:** < 1.5s
-- **Time to Interactive:** < 3s
-- **Mobile-Optimized:** 100% responsive
-- **Accessibility:** WCAG 2.1 AA Compliant
-
----
-
-**Built with ❤️ for Jharkhand Tourism & Community Empowerment**
+**Built for Jharkhand Tourism & Community Empowerment**
 
 **SIH 2025 - Problem Statement #25032**
 
 ---
 
-## 🔗 Quick Links
-
-- [📖 Full Documentation](docs/)
-- [🎨 Design System](https://stitch.withgoogle.com/projects/11018627272293321940)
-- [🐛 Report Bug](https://github.com/your-team/jharkhandyatra/issues/new?template=bug_report.md)
-- [💡 Request Feature](https://github.com/your-team/jharkhandyatra/issues/new?template=feature_request.md)
-- [💬 Discussions](https://github.com/your-team/jharkhandyatra/discussions)
-
----
-
-**Last Updated:** December 2024  
-**Version:** 1.0.0  
-**Status:** ✅ MVP Complete
+**Last Updated:** December 2025
+**Version:** 0.8.0
+**Status:** Frontend Complete, API Integration Planned

@@ -40,8 +40,11 @@ export const ReviewCard = ({
 	const placeholder = avatarPlaceholder || getInitials(author);
 
 	return (
-		<div className={`card bg-base-100 shadow-md p-6 ${className}`}>
-			<div className="flex items-start gap-4">
+		<article
+			className={`card bg-base-100 shadow-md p-4 sm:p-6 ${className}`}
+			aria-label={`Review by ${author}, ${rating} out of 5 stars`}
+		>
+			<div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
 				{/* Avatar */}
 				<Avatar
 					src={avatarSrc}
@@ -52,12 +55,12 @@ export const ReviewCard = ({
 				/>
 
 				{/* Review Content */}
-				<div className="flex-1">
+				<div className="flex-1 w-full">
 					{/* Author and Rating */}
-					<div className="flex items-center justify-between mb-2">
+					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1 sm:gap-0">
 						<div>
-							<h3 className="font-semibold text-lg">{author}</h3>
-							<p className="text-sm text-base-content/60">{formatDate(date)}</p>
+							<h3 className="font-semibold text-base sm:text-lg">{author}</h3>
+							<p className="text-xs sm:text-sm text-base-content/60">{formatDate(date)}</p>
 						</div>
 						<Rating
 							name={`review-${author}-${date}`}
@@ -69,9 +72,9 @@ export const ReviewCard = ({
 					</div>
 
 					{/* Review Text */}
-					<p className="text-base-content/80 leading-relaxed">{content}</p>
+					<p className="text-sm sm:text-base text-base-content/80 leading-relaxed">{content}</p>
 				</div>
 			</div>
-		</div>
+		</article>
 	);
 };

@@ -32,12 +32,16 @@ export const ShoppingCart = ({
 	// Empty cart state
 	if (items.length === 0) {
 		return (
-			<div className={`flex flex-col h-full ${className}`.trim()}>
+			<aside
+				className={`flex flex-col h-full ${className}`.trim()}
+				role="region"
+				aria-label="Shopping cart"
+			>
 				{/* Header */}
 				<div className="flex items-center justify-between p-4 border-b border-base-200">
 					<h2 className="font-heading text-lg font-bold">Shopping Cart</h2>
 					{onClose && (
-						<Button style="ghost" size="sm" className="btn-circle" onClick={onClose}>
+						<Button style="ghost" size="sm" className="btn-circle" onClick={onClose} aria-label="Close cart">
 							<Icon name="close" size="md" />
 						</Button>
 					)}
@@ -59,19 +63,24 @@ export const ShoppingCart = ({
 						</Button>
 					)}
 				</div>
-			</div>
+			</aside>
 		);
 	}
 
 	return (
-		<div className={`flex flex-col h-full ${className}`.trim()}>
+		<aside
+			className={`flex flex-col h-full ${className}`.trim()}
+			role="region"
+			aria-label={`Shopping cart with ${itemCount} item${itemCount !== 1 ? 's' : ''}`}
+			aria-live="polite"
+		>
 			{/* Header */}
 			<div className="flex items-center justify-between p-4 border-b border-base-200">
 				<h2 className="font-heading text-lg font-bold">
 					Shopping Cart ({itemCount} item{itemCount !== 1 ? 's' : ''})
 				</h2>
 				{onClose && (
-					<Button style="ghost" size="sm" className="btn-circle" onClick={onClose}>
+					<Button style="ghost" size="sm" className="btn-circle" onClick={onClose} aria-label="Close cart">
 						<Icon name="close" size="md" />
 					</Button>
 				)}
@@ -130,6 +139,6 @@ export const ShoppingCart = ({
 					</Button>
 				)}
 			</div>
-		</div>
+		</aside>
 	);
 };

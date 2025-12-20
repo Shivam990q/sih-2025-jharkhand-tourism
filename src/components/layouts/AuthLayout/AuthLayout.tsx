@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
-import { Link } from 'react-router';
 import { Icon } from '../../atoms/Icon';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { AuthLayoutProps } from './AuthLayoutProps';
 
 /**
@@ -89,9 +89,9 @@ export const AuthLayout = ({
 				<div className="mt-6 text-center text-sm text-base-content/60">
 					<p>
 						By continuing, you agree to our{' '}
-						<Link to="/terms" className="link link-primary">Terms of Service</Link>
+						<NotImplementedLink feature="Terms of Service" className="link link-primary">Terms of Service</NotImplementedLink>
 						{' '}and{' '}
-						<Link to="/privacy" className="link link-primary">Privacy Policy</Link>
+						<NotImplementedLink feature="Privacy Policy" className="link link-primary">Privacy Policy</NotImplementedLink>
 					</p>
 				</div>
 			</div>

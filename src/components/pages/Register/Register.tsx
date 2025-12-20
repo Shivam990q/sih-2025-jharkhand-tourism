@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Icon } from '../../atoms/Icon';
 import { Button } from '../../atoms/Button';
 import { Input } from '../../atoms/Input';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { RegisterProps, RegisterFormData, UserRole } from './RegisterProps';
 
 /**
@@ -268,13 +269,13 @@ export const Register = ({
 						/>
 						<span className="label-text">
 							I agree to the{' '}
-							<Link to="/terms" className="link link-primary">
+							<NotImplementedLink feature="Terms of Service" className="link link-primary">
 								Terms of Service
-							</Link>{' '}
+							</NotImplementedLink>{' '}
 							and{' '}
-							<Link to="/privacy" className="link link-primary">
+							<NotImplementedLink feature="Privacy Policy" className="link link-primary">
 								Privacy Policy
-							</Link>
+							</NotImplementedLink>
 						</span>
 					</label>
 					{validationErrors.acceptTerms && (

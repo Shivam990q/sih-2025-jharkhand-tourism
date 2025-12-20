@@ -18,11 +18,12 @@ import { playwright } from '@vitest/browser-playwright';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
   // Add the React plugin to enable support for React and JSX/TSX
   react(), tailwindcss()],
-  base: '/sih-2025-jharkhand-tourism/',
+  // Only use subdirectory base path in production (GitHub Pages)
+  base: mode === 'production' ? '/sih-2025-jharkhand-tourism/' : '/',
   server: {
     host: true // Exposes the server on the local network
   },
@@ -49,4 +50,4 @@ export default defineConfig({
       }
     }]
   }
-});
+}));

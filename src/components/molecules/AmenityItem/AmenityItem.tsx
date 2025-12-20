@@ -44,13 +44,21 @@ export const AmenityItem = ({
 	].filter(Boolean).join(' ');
 
 	return (
-		<div className={containerClasses}>
+		<div
+			className={containerClasses}
+			aria-disabled={!available || undefined}
+			role="listitem"
+		>
 			<Icon
 				name={icon}
 				size={iconSizes[size]}
 				color={available ? 'base-content' : 'neutral'}
+				ariaLabel={available ? label : `${label} (unavailable)`}
 			/>
-			<span className={labelClasses}>{label}</span>
+			<span className={labelClasses}>
+				{label}
+				{!available && <span className="sr-only"> (unavailable)</span>}
+			</span>
 		</div>
 	);
 };

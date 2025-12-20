@@ -35,12 +35,26 @@ export const Skeleton = ({
 	// Render as span for text variant
 	if (variant === 'text') {
 		return (
-			<span className={skeletonClasses} {...rest}>
+			<span
+				className={skeletonClasses}
+				role="status"
+				aria-busy="true"
+				aria-label="Loading content"
+				{...rest}
+			>
 				{children}
 			</span>
 		);
 	}
 
 	// Render as div for default variant
-	return <div className={skeletonClasses} {...rest} />;
+	return (
+		<div
+			className={skeletonClasses}
+			role="status"
+			aria-busy="true"
+			aria-label="Loading content"
+			{...rest}
+		/>
+	);
 };

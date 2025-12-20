@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Icon } from '../../atoms/Icon';
 import { Button } from '../../atoms/Button';
 import { Input } from '../../atoms/Input';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { CheckoutProps, PaymentDetails } from './CheckoutProps';
 
 // Mock booking data - in a real app, this would come from state or URL params
@@ -281,13 +282,13 @@ export const Checkout = ({
 										/>
 										<span className="text-sm">
 											I agree to the{' '}
-											<Link to="/terms" className="link link-primary">
+											<NotImplementedLink feature="Terms & Conditions" className="link link-primary">
 												Terms & Conditions
-											</Link>{' '}
+											</NotImplementedLink>{' '}
 											and{' '}
-											<Link to="/privacy" className="link link-primary">
+											<NotImplementedLink feature="Privacy Policy" className="link link-primary">
 												Privacy Policy
-											</Link>
+											</NotImplementedLink>
 											. I understand that my booking is subject to the host's cancellation policy.
 										</span>
 									</label>

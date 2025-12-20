@@ -5,88 +5,31 @@ import { ListingGrid } from '../../organisms/ListingGrid';
 import { SearchFilters, defaultFilterState } from '../../organisms/SearchFilters';
 import type { FilterState } from '../../organisms/SearchFilters';
 import type { HomestaysProps } from './HomestaysProps';
+import { useApi } from '../../../hooks/useApi';
+import { homestaysService } from "../../../services/homestays.service.ts";
+import type { Homestay } from "../../../types/api.types.ts";
 import type { ListingCardProps } from '../../molecules/ListingCard';
 
-// Default homestays data
-const defaultHomestays: Omit<ListingCardProps, 'isSaved' | 'onSave'>[] = [
-	{
-		id: '1',
-		type: 'homestay',
-		title: 'Peaceful Cottage in Netarhat',
-		image: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=400&h=300&fit=crop',
-		location: 'Netarhat, Jharkhand',
-		rating: 4.8,
-		reviewCount: 24,
-		price: 2500,
-		period: 'per night',
-		badges: [{ label: 'Superhost', variant: 'primary' }],
-	},
-	{
-		id: '2',
-		type: 'homestay',
-		title: 'Forest View Lodge at Betla',
-		image: 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=400&h=300&fit=crop',
-		location: 'Betla, Jharkhand',
-		rating: 4.6,
-		reviewCount: 18,
-		price: 1800,
-		period: 'per night',
-	},
-	{
-		id: '3',
-		type: 'homestay',
-		title: 'Tribal Heritage Home',
-		image: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=400&h=300&fit=crop',
-		location: 'Ranchi, Jharkhand',
-		rating: 4.9,
-		reviewCount: 42,
-		price: 3200,
-		period: 'per night',
-		badges: [{ label: 'New', variant: 'secondary' }],
-	},
-	{
-		id: '4',
-		type: 'homestay',
-		title: 'Waterfall Retreat Cottage',
-		image: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop',
-		location: 'Hundru Falls, Jharkhand',
-		rating: 4.7,
-		reviewCount: 31,
-		price: 2200,
-		period: 'per night',
-	},
-	{
-		id: '5',
-		type: 'homestay',
-		title: 'Eco Farm Stay',
-		image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop',
-		location: 'Hazaribagh, Jharkhand',
-		rating: 4.5,
-		reviewCount: 15,
-		price: 1500,
-		period: 'per night',
-	},
-	{
-		id: '6',
-		type: 'homestay',
-		title: 'Hillside Villa',
-		image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
-		location: 'Dalma Hills, Jharkhand',
-		rating: 4.8,
-		reviewCount: 28,
-		price: 4500,
-		period: 'per night',
-		badges: [{ label: 'Premium', variant: 'accent' }],
-	},
-];
+/** Transform Homestay to ListingGrid format */
+const transformHomestay = (homestay: Homestay): Omit<ListingCardProps, 'isSaved' | 'onSave'> => ({
+	id: homestay.id,
+	type: 'homestay' as const,
+	title: homestay.title,
+	image: homestay.images[0] || '',
+	location: homestay.location,
+	rating: homestay.rating,
+	reviewCount: homestay.reviewCount,
+	price: homestay.price,
+	period: 'per night',
+});
 
 /**
  * Homestays page component for browsing homestay listings
  */
 export const Homestays = ({
-	homestays = defaultHomestays,
-	totalCount = 48,
-	loading = false,
+	homestays: externalHomestays,
+	totalCount: externalTotalCount,
+	loading: externalLoading = false,
 	filters: externalFilters,
 	onFilterChange,
 	onApplyFilters,
@@ -98,6 +41,22 @@ export const Homestays = ({
 	onPageChange,
 	className = '',
 }: HomestaysProps) => {
+	// Fetch homestays from API (uses VITE_API_BASE_URL from .env)
+	const { data: apiData, loading: apiLoading, error } = useApi(
+		() => homestaysService.getAll(),
+		[]
+	);
+
+	// Transform API data to ListingCard format
+	const apiListings = apiData?.data?.map(transformHomestay) || [];
+	const externalListings = externalHomestays?.map(transformHomestay) || [];
+
+	// Use external data if provided, otherwise use API data
+	const listings = externalListings.length > 0 ? externalListings : apiListings;
+
+	const loading = externalLoading || apiLoading;
+	const totalCount = externalTotalCount ?? apiData?.meta?.total ?? listings.length;
+
 	// Internal filter state (used if no external control)
 	const [internalFilters, setInternalFilters] = useState<FilterState>({
 		...defaultFilterState,
@@ -190,18 +149,18 @@ export const Homestays = ({
 					{/* Listings Grid */}
 					<div className="flex-1">
 						<ListingGrid
-							listings={homestays}
+							listings={listings}
 							loading={loading}
 							skeletonCount={6}
 							savedIds={savedIds}
 							onSave={onSave}
 							columns={{ sm: 1, md: 2, lg: 2, xl: 3 }}
-							emptyTitle="No homestays found"
-							emptyMessage="Try adjusting your filters to find more results."
+							emptyTitle={error ? "Unable to load homestays" : "No homestays found"}
+							emptyMessage={error ? "Please check your connection and try again." : "Try adjusting your filters to find more results."}
 						/>
 
 						{/* Pagination */}
-						{!loading && homestays.length > 0 && totalPages > 1 && (
+						{!loading && listings.length > 0 && totalPages > 1 && (
 							<div className="mt-8 flex justify-center">
 								<div className="join">
 									<button

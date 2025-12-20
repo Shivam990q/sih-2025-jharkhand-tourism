@@ -117,14 +117,18 @@ export const SearchFilters = ({
 	const effectiveListingType = filters.listingType !== 'all' ? filters.listingType : listingType;
 
 	return (
-		<div className={`bg-base-100 ${isMobileDrawer ? '' : 'rounded-lg border border-base-200 p-4'} ${className}`.trim()}>
+		<aside
+			className={`bg-base-100 ${isMobileDrawer ? '' : 'rounded-lg border border-base-200 p-3 sm:p-4'} ${className}`.trim()}
+			role="search"
+			aria-label="Filter search results"
+		>
 			{/* Header */}
-			<div className={`flex items-center justify-between ${isMobileDrawer ? 'p-4 border-b border-base-200' : 'mb-4'}`}>
-				<h3 className="font-heading font-semibold text-lg flex items-center gap-2">
+			<div className={`flex items-center justify-between ${isMobileDrawer ? 'p-3 sm:p-4 border-b border-base-200' : 'mb-3 sm:mb-4'}`}>
+				<h3 className="font-heading font-semibold text-base sm:text-lg flex items-center gap-1 sm:gap-2">
 					<Icon name="filter_list" size="md" />
 					Filters
 					{activeCount > 0 && (
-						<span className="badge badge-primary badge-sm">{activeCount}</span>
+						<span className="badge badge-primary badge-xs sm:badge-sm">{activeCount}</span>
 					)}
 				</h3>
 				{activeCount > 0 && (
@@ -141,7 +145,7 @@ export const SearchFilters = ({
 
 			{/* Active Filter Chips */}
 			{activeChips.length > 0 && (
-				<div className={`flex flex-wrap gap-2 ${isMobileDrawer ? 'px-4 pb-4' : 'mb-4'}`}>
+				<div className={`flex flex-wrap gap-1.5 sm:gap-2 ${isMobileDrawer ? 'px-3 sm:px-4 pb-3 sm:pb-4' : 'mb-3 sm:mb-4'}`}>
 					{activeChips.map((chip, index) => (
 						<FilterChip
 							key={index}
@@ -154,12 +158,12 @@ export const SearchFilters = ({
 			)}
 
 			{/* Filter Sections */}
-			<div className={isMobileDrawer ? 'p-4 space-y-6 overflow-y-auto max-h-[60vh]' : 'space-y-6'}>
+			<div className={isMobileDrawer ? 'p-3 sm:p-4 space-y-4 sm:space-y-6 overflow-y-auto max-h-[50vh] sm:max-h-[60vh]' : 'space-y-4 sm:space-y-6'}>
 				{/* Listing Type Selector */}
 				{showListingTypeSelector && (
 					<div className="collapse collapse-arrow bg-base-200/50">
 						<input type="checkbox" defaultChecked />
-						<div className="collapse-title font-medium">
+						<div className="collapse-title text-sm sm:text-base font-medium">
 							Listing Type
 						</div>
 						<div className="collapse-content">
@@ -183,7 +187,7 @@ export const SearchFilters = ({
 				{/* Price Range */}
 				<div className="collapse collapse-arrow bg-base-200/50">
 					<input type="checkbox" defaultChecked />
-					<div className="collapse-title font-medium">
+					<div className="collapse-title text-sm sm:text-base font-medium">
 						Price Range
 					</div>
 					<div className="collapse-content">
@@ -227,6 +231,10 @@ export const SearchFilters = ({
 									max: Number(e.target.value),
 								})}
 								className="range range-primary range-sm"
+								aria-label={`Maximum price: ₹${filters.priceRange.max}`}
+								aria-valuemin={0}
+								aria-valuemax={10000}
+								aria-valuenow={filters.priceRange.max}
 							/>
 						</div>
 					</div>
@@ -235,7 +243,7 @@ export const SearchFilters = ({
 				{/* Rating Filter */}
 				<div className="collapse collapse-arrow bg-base-200/50">
 					<input type="checkbox" defaultChecked />
-					<div className="collapse-title font-medium">
+					<div className="collapse-title text-sm sm:text-base font-medium">
 						Minimum Rating
 					</div>
 					<div className="collapse-content">
@@ -269,7 +277,7 @@ export const SearchFilters = ({
 				{/* District/Location */}
 				<div className="collapse collapse-arrow bg-base-200/50">
 					<input type="checkbox" defaultChecked />
-					<div className="collapse-title font-medium">
+					<div className="collapse-title text-sm sm:text-base font-medium">
 						Location
 					</div>
 					<div className="collapse-content">
@@ -293,7 +301,7 @@ export const SearchFilters = ({
 				{(effectiveListingType === 'all' || effectiveListingType === 'homestay') && (
 					<div className="collapse collapse-arrow bg-base-200/50">
 						<input type="checkbox" />
-						<div className="collapse-title font-medium">
+						<div className="collapse-title text-sm sm:text-base font-medium">
 							Amenities
 						</div>
 						<div className="collapse-content">
@@ -322,7 +330,7 @@ export const SearchFilters = ({
 				{(effectiveListingType === 'all' || effectiveListingType === 'guide') && (
 					<div className="collapse collapse-arrow bg-base-200/50">
 						<input type="checkbox" />
-						<div className="collapse-title font-medium">
+						<div className="collapse-title text-sm sm:text-base font-medium">
 							Languages
 						</div>
 						<div className="collapse-content">
@@ -350,7 +358,7 @@ export const SearchFilters = ({
 				{(effectiveListingType === 'all' || effectiveListingType === 'product') && (
 					<div className="collapse collapse-arrow bg-base-200/50">
 						<input type="checkbox" />
-						<div className="collapse-title font-medium">
+						<div className="collapse-title text-sm sm:text-base font-medium">
 							Categories
 						</div>
 						<div className="collapse-content">
@@ -377,7 +385,7 @@ export const SearchFilters = ({
 
 			{/* Mobile Apply Button */}
 			{isMobileDrawer && (
-				<div className="p-4 border-t border-base-200">
+				<div className="p-3 sm:p-4 border-t border-base-200">
 					<Button
 						variant="primary"
 						className="w-full"
@@ -388,6 +396,6 @@ export const SearchFilters = ({
 					</Button>
 				</div>
 			)}
-		</div>
+		</aside>
 	);
 };

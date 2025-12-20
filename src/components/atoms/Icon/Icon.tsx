@@ -64,11 +64,20 @@ export const Icon = ({
 		fontVariationSettings: `'FILL' ${fill ? 1 : 0}, 'wght' ${weight}, 'GRAD' ${grade}, 'opsz' ${opticalSize}`
 	};
 
+	// Keyboard handler for accessibility (Enter and Space activate the button)
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+		if (onClick && (event.key === 'Enter' || event.key === ' ')) {
+			event.preventDefault();
+			onClick();
+		}
+	};
+
 	return (
 		<span
 			className={iconClasses}
 			style={iconStyle}
 			onClick={onClick}
+			onKeyDown={onClick ? handleKeyDown : undefined}
 			role={onClick ? 'button' : undefined}
 			tabIndex={onClick ? 0 : undefined}
 			aria-label={ariaLabel || name}

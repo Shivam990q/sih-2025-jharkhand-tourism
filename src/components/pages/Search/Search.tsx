@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button';
 import { Input } from '../../atoms/Input';
 import { ListingGrid } from '../../organisms/ListingGrid';
 import { SearchFilters, defaultFilterState } from '../../organisms/SearchFilters';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { FilterState } from '../../organisms/SearchFilters';
 import type { SearchProps } from './SearchProps';
 import type { ListingCardProps } from '../../molecules/ListingCard';
@@ -253,14 +254,14 @@ export const Search = ({
 										<Icon name="cottage" size="sm" />
 										Homestays
 									</Link>
-									<Link to="/guides" className="btn btn-outline btn-sm">
+									<NotImplementedLink feature="Guides" className="btn btn-outline btn-sm">
 										<Icon name="person" size="sm" />
 										Guides
-									</Link>
-									<Link to="/marketplace" className="btn btn-outline btn-sm">
+									</NotImplementedLink>
+									<NotImplementedLink feature="Marketplace" className="btn btn-outline btn-sm">
 										<Icon name="storefront" size="sm" />
 										Marketplace
-									</Link>
+									</NotImplementedLink>
 								</div>
 							</div>
 						) : (

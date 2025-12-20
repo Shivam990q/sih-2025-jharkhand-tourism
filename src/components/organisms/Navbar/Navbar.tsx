@@ -4,6 +4,7 @@ import { Avatar } from '../../atoms/Avatar';
 import { Badge } from '../../atoms/Badge';
 import { Icon } from '../../atoms/Icon';
 import { SearchBar } from '../../molecules/SearchBar';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { NavbarProps } from './NavbarProps';
 
 /**
@@ -21,25 +22,25 @@ export const Navbar = ({
 }: NavbarProps) => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-	// Navigation links
+	// Navigation links (implemented flag indicates if route exists)
 	const navLinks = [
-		{ label: 'Homestays', href: '/homestays', icon: 'cottage' },
-		{ label: 'Guides', href: '/guides', icon: 'person' },
-		{ label: 'Marketplace', href: '/marketplace', icon: 'storefront' },
+		{ label: 'Homestays', href: '/homestays', icon: 'cottage', implemented: true },
+		{ label: 'Guides', href: '/guides', icon: 'person', implemented: false },
+		{ label: 'Marketplace', href: '/marketplace', icon: 'storefront', implemented: false },
 	];
 
 	// User dropdown links
 	const userLinks = [
-		{ label: 'Profile', href: '/profile', icon: 'account_circle' },
-		{ label: 'My Bookings', href: '/bookings', icon: 'calendar_month' },
-		{ label: 'Saved', href: '/saved', icon: 'favorite' },
-		{ label: 'Settings', href: '/settings', icon: 'settings' },
+		{ label: 'Profile', href: '/dashboard/profile', icon: 'account_circle', implemented: true },
+		{ label: 'My Bookings', href: '/bookings', icon: 'calendar_month', implemented: false },
+		{ label: 'Saved', href: '/saved', icon: 'favorite', implemented: false },
+		{ label: 'Settings', href: '/settings', icon: 'settings', implemented: false },
 	];
 
 	// Provider-only links
 	const providerLinks = [
-		{ label: 'Dashboard', href: '/dashboard', icon: 'dashboard' },
-		{ label: 'My Listings', href: '/dashboard/listings', icon: 'list' },
+		{ label: 'Dashboard', href: '/dashboard', icon: 'dashboard', implemented: true },
+		{ label: 'My Listings', href: '/dashboard/listings', icon: 'list', implemented: false },
 	];
 
 	return (
@@ -69,15 +70,25 @@ export const Navbar = ({
 				<ul className="menu menu-horizontal px-1 gap-1">
 					{navLinks.map((link) => (
 						<li key={link.href}>
-							<NavLink
-								to={link.href}
-								className={({ isActive }) =>
-									`font-medium hover:text-primary transition-colors ${isActive ? 'text-primary' : ''}`
-								}
-							>
-								<Icon name={link.icon} size="sm" />
-								{link.label}
-							</NavLink>
+							{link.implemented ? (
+								<NavLink
+									to={link.href}
+									className={({ isActive }) =>
+										`font-medium hover:text-primary transition-colors ${isActive ? 'text-primary' : ''}`
+									}
+								>
+									<Icon name={link.icon} size="sm" />
+									{link.label}
+								</NavLink>
+							) : (
+								<NotImplementedLink
+									feature={link.label}
+									className="font-medium hover:text-primary transition-colors"
+								>
+									<Icon name={link.icon} size="sm" />
+									{link.label}
+								</NotImplementedLink>
+							)}
 						</li>
 					))}
 				</ul>
@@ -95,7 +106,7 @@ export const Navbar = ({
 				</div>
 
 				{/* Cart button */}
-				<Link to="/cart" className="btn btn-ghost btn-circle">
+				<NotImplementedLink feature="Cart" className="btn btn-ghost btn-circle">
 					<div className="indicator">
 						<Icon name="shopping_cart" size="md" />
 						{cartItemCount > 0 && (
@@ -108,7 +119,7 @@ export const Navbar = ({
 							</Badge>
 						)}
 					</div>
-				</Link>
+				</NotImplementedLink>
 
 				{/* User section */}
 				{user ? (
@@ -142,10 +153,17 @@ export const Navbar = ({
 								<>
 									{providerLinks.map((link) => (
 										<li key={link.href}>
-											<Link to={link.href}>
-												<Icon name={link.icon} size="sm" />
-												{link.label}
-											</Link>
+											{link.implemented ? (
+												<Link to={link.href}>
+													<Icon name={link.icon} size="sm" />
+													{link.label}
+												</Link>
+											) : (
+												<NotImplementedLink feature={link.label}>
+													<Icon name={link.icon} size="sm" />
+													{link.label}
+												</NotImplementedLink>
+											)}
 										</li>
 									))}
 									<div className="divider my-0"></div>
@@ -155,10 +173,17 @@ export const Navbar = ({
 							{/* User links */}
 							{userLinks.map((link) => (
 								<li key={link.href}>
-									<Link to={link.href}>
-										<Icon name={link.icon} size="sm" />
-										{link.label}
-									</Link>
+									{link.implemented ? (
+										<Link to={link.href}>
+											<Icon name={link.icon} size="sm" />
+											{link.label}
+										</Link>
+									) : (
+										<NotImplementedLink feature={link.label}>
+											<Icon name={link.icon} size="sm" />
+											{link.label}
+										</NotImplementedLink>
+									)}
 								</li>
 							))}
 
@@ -204,16 +229,26 @@ export const Navbar = ({
 					<ul className="menu p-4">
 						{navLinks.map((link) => (
 							<li key={link.href}>
-								<NavLink
-									to={link.href}
-									className={({ isActive }) =>
-										`font-medium ${isActive ? 'text-primary' : ''}`
-									}
-									onClick={() => setMobileMenuOpen(false)}
-								>
-									<Icon name={link.icon} size="md" />
-									{link.label}
-								</NavLink>
+								{link.implemented ? (
+									<NavLink
+										to={link.href}
+										className={({ isActive }) =>
+											`font-medium ${isActive ? 'text-primary' : ''}`
+										}
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										<Icon name={link.icon} size="md" />
+										{link.label}
+									</NavLink>
+								) : (
+									<NotImplementedLink
+										feature={link.label}
+										className="font-medium"
+									>
+										<Icon name={link.icon} size="md" />
+										{link.label}
+									</NotImplementedLink>
+								)}
 							</li>
 						))}
 					</ul>

@@ -10,6 +10,7 @@ import { createRoot } from 'react-dom/client'; // New React 18+ root API for con
 import { BrowserRouter } from 'react-router'; // Client-side routing provider
 import './index.css'; // Global stylesheet for the application
 import App from './App.tsx'; // Root application component (default export)
+import { ToastProvider } from './context/ToastContext'; // Global toast notifications
 
 /**
  * Locate the DOM mount node and bootstrap the React application.
@@ -21,8 +22,10 @@ import App from './App.tsx'; // Root application component (default export)
  */
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<BrowserRouter>
-			<App />
+		<BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+			<ToastProvider>
+				<App />
+			</ToastProvider>
 		</BrowserRouter>
 	</StrictMode>,
 );

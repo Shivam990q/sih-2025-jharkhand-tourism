@@ -53,7 +53,7 @@ export const Badge = ({
 	].filter(Boolean).join(' ');
 
 	return (
-		<span className={badgeClasses}>
+		<span className={badgeClasses} role="status">
 			{children}
 		</span>
 	);

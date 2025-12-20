@@ -60,43 +60,17 @@ export const WithLoggedInUser: Story = {
 	],
 };
 
-// Loading state (empty featured items)
-export const EmptyFeatured: Story = {
+// Empty static content (homestays fetched from API)
+export const EmptyStaticContent: Story = {
 	args: {
-		featuredHomestays: [],
 		featuredDestinations: [],
 		testimonials: [],
 	},
 };
 
-// Custom featured content
-export const CustomContent: Story = {
+// Custom static content (homestays fetched from API)
+export const CustomStaticContent: Story = {
 	args: {
-		featuredHomestays: [
-			{
-				id: '1',
-				type: 'homestay',
-				title: 'Luxury Treehouse Experience',
-				image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop',
-				location: 'Dalma Hills, Jharkhand',
-				rating: 5.0,
-				reviewCount: 89,
-				price: 5500,
-				period: 'per night',
-				badges: [{ label: 'Premium', variant: 'accent' }],
-			},
-			{
-				id: '2',
-				type: 'homestay',
-				title: 'Riverside Eco Lodge',
-				image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
-				location: 'Subarnarekha River, Jharkhand',
-				rating: 4.7,
-				reviewCount: 45,
-				price: 3800,
-				period: 'per night',
-			},
-		],
 		featuredDestinations: [
 			{
 				id: '1',

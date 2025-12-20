@@ -6,6 +6,7 @@ import { Badge } from '../../atoms/Badge';
 import { Rating } from '../../atoms/Rating';
 import { Avatar } from '../../atoms/Avatar';
 import { ReviewCard } from '../../molecules/ReviewCard';
+import { NotImplementedLink } from '../../molecules/NotImplementedLink';
 import type { ProductDetailProps } from './ProductDetailProps';
 
 // Mock product data - in a real app, this would come from an API
@@ -123,8 +124,8 @@ export const ProductDetail = ({
 				<div className="breadcrumbs text-sm mb-6">
 					<ul>
 						<li><Link to="/">Home</Link></li>
-						<li><Link to="/marketplace">Marketplace</Link></li>
-						<li><Link to={'/marketplace?category=' + product.category}>{product.category}</Link></li>
+						<li><NotImplementedLink feature="Marketplace">Marketplace</NotImplementedLink></li>
+						<li><NotImplementedLink feature={product.category}>{product.category}</NotImplementedLink></li>
 						<li>{product.title}</li>
 					</ul>
 				</div>
